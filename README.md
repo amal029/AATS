@@ -68,6 +68,7 @@ interpolation.
 ├── Makefile                    # Build and execution commands
 └── README.md
 
+
 ## Reproducibility Instructions:
 At the top level of the directory structure do the following in bash/zsh
 shell: ``make compile && make run && make julia && make plot``. If you
