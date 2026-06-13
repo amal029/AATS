@@ -25,7 +25,8 @@ seconds of simulation time.
 
 AATS vastly outperforms the synchronous baseline in highly heterogeneous
 and multi-rate topologies, while drastically reducing memory allocation
-overhead.
+overhead. All experiments were run on Apple M3 Max, 36 GB, Sequoia
+15.7.7.
 
 | Benchmark Topology | Dimensions | AATS (C++) | Julia SciML | Speedup | Memory / Allocations Notes |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -72,7 +73,7 @@ floor between explicit Taylor expansion and Hermite interpolation.
  1. C++ compiler (g++), standard >= 17, version >= 16.0.1
  2. Julia version 1.12.6 (``julia -e 'import Pkg;
     Pkg.add(["DifferentialEquations", "DelayDiffEq", "DataFrames",
-    "CSV"])'``)
+    "CSV", "BenchmarkTools"])'``)
  3. Python version >= 3.11 (``pip3 install pandas numpy scipy
     matplotlib``)
 	
