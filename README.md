@@ -53,29 +53,6 @@ in time-sparse and multi-rate topologies**, while gracefully matching
 synchronous solvers in dense systems without the crippling memory
 allocation overhead.
 
-## Testing Environment & Hardware Nuance
-Benchmarks were evaluated natively across two distinct, top-tier
-hardware architectures to isolate algorithmic efficiency from
-hardware-specific caching and OS-level memory management behaviours:
-
-1. **Linux (x86_64) - Intel Core i7-14700:** Compiled via GCC 15.0.0.
-   Linux’s highly optimized `glibc` memory allocator significantly
-   mitigates the penalty for Julia’s dense-output heap allocations,
-   providing a highly favorable environment for SciML's synchronous
-   tracking.
-2. **macOS (ARM64) - Apple M3 Max:** Compiled via GCC 16.0.1. The M3 Max
-   features an exceptionally wide execution architecture and massive
-   local L1/L2 caches. This hardware profile heavily favors the
-   zero-allocation, stack-based design of AATS, allowing it to retain
-   almost the entire computational graph in-cache, yielding maximum
-   asynchronous performance (e.g., AATS executes the State-Dependent
-   network ~2.3x faster natively on the M3 Max than on the i7-14700).
-
-*Conclusion: AATS successfully eliminates the dynamic memory allocation
-bottleneck inherent to SciML. It is exceptionally performant on modern
-ARM architectures (like the M3 Max) where stack operations are deeply
-hardware-optimized, circumventing the OS-level heap allocation overhead
-that cripples traditional solvers on consumer hardware.*
 
 ## Expected Outputs & Accuracy
 At `1e-10` tolerances, the AATS solver produces trajectories that are
