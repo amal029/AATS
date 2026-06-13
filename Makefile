@@ -1,6 +1,6 @@
 # Compiler settings
-CXX ?= $CXX
-CXXFLAGS = -ftree-vectorize -ffast-math -std=c++17 -march=native -O3 -I./include
+CXX ?= $(CXX)
+CXXFLAGS = -fopt-info-vec-optimized -ftree-vectorize -ffast-math -std=c++17 -march=native -O3 -I./include
 
 # Target executable
 TARGET = aats_benchmarks
