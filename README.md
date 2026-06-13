@@ -19,9 +19,9 @@ order-of-magnitude speedups over state-of-the-art synchronous solvers.
 
 ## Performance: AATS vs. Julia SciML (Tsit5)
 We benchmarked AATS against Julia's `DifferentialEquations.jl` (SciML),
-the current state-of-the-art for solving DDEs. Both solvers were
-evaluated at a strict global/local error tolerance of `1e-10` over 5
-seconds of simulation time.
+the current state-of-the-art for solving DDEs. Solvers were evaluated at
+a strict global/local error tolerance of `1e-10` over 5 seconds of
+simulation time.
 
 ### Experiments run on Apple M3 Max, 36 GB, Sequoia 15.7.7 and g++ 16.0.1.
 
