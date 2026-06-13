@@ -16,7 +16,7 @@ namespace DDE {
 // -------------------------------------------------------------------------
 // Zero-Allocation Taylor Polynomial (Truncated to compile-time Degree K)
 // -------------------------------------------------------------------------
-template <typename T, size_t K> struct alignas(64) TaylorPoly {
+template <typename T, size_t K> struct TaylorPoly {
   std::array<T, K> c{};
 
   TaylorPoly() = default;
@@ -25,15 +25,13 @@ template <typename T, size_t K> struct alignas(64) TaylorPoly {
   [[nodiscard]] T nom() const noexcept { return c[0]; }
 
   TaylorPoly &operator+=(const TaylorPoly &rhs) noexcept {
-#pragma GCC ivdep
-#pragma omp simd
+#pragma GCC unroll 8
     for (size_t i = 0; i < K; ++i)
       c[i] += rhs.c[i];
     return *this;
   }
   TaylorPoly &operator-=(const TaylorPoly &rhs) noexcept {
-#pragma GCC ivdep
-#pragma omp simd
+#pragma GCC unroll 8
     for (size_t i = 0; i < K; ++i)
       c[i] -= rhs.c[i];
     return *this;
@@ -47,18 +45,14 @@ template <typename T, size_t K> struct alignas(64) TaylorPoly {
     return *this;
   }
   TaylorPoly &operator*=(T s) noexcept {
-#pragma GCC ivdep
-#pragma omp simd
-
+#pragma GCC unroll 8
     for (size_t i = 0; i < K; ++i)
       c[i] *= s;
     return *this;
   }
   TaylorPoly &operator/=(T s) noexcept {
     T inv = T(1) / s;
-#pragma GCC ivdep
-#pragma omp simd
-
+#pragma GCC unroll 8
     for (size_t i = 0; i < K; ++i)
       c[i] *= inv;
     return *this;
@@ -80,9 +74,7 @@ template <typename T, size_t K> struct alignas(64) TaylorPoly {
   operator*(const TaylorPoly &rhs) const noexcept {
     TaylorPoly res;
     for (size_t i = 0; i < K; ++i) {
-#pragma GCC ivdep
-#pragma omp simd
-
+#pragma GCC unroll 8
       for (size_t j = 0; j < K - i; ++j)
         res.c[i + j] += c[i] * rhs.c[j];
     }
@@ -126,9 +118,7 @@ template <typename T, size_t K>
 operator-(T s, const TaylorPoly<T, K> &b) noexcept {
   TaylorPoly<T, K> res;
   res.c[0] = s;
-#pragma GCC ivdep
-#pragma omp simd
-  
+#pragma GCC unroll 8
   for (size_t i = 0; i < K; ++i)
     res.c[i] -= b.c[i];
   return res;
@@ -601,8 +591,7 @@ private:
       if (seg) {
         Poly dt_ad = t_delay_ad - seg->start_t;
         Poly val_ad(seg->coeffs.back());
-#pragma GCC ivdep
-#pragma omp simd
+#pragma GCC unroll 8
         for (int p = static_cast<int>(PolySize) - 2; p >= 0; --p)
           val_ad = val_ad * dt_ad + seg->coeffs[p];
         return val_ad;
