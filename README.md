@@ -69,7 +69,7 @@ floor between explicit Taylor expansion and Hermite interpolation.
 └── README.md
 ```
 ## Requirements
- 1. C++ compiler (g++, clang++), standard >= 17.
+ 1. C++ compiler (g++), standard >= 17, version >= 16.0.1
  2. Julia version 1.12.6 (``julia -e 'import Pkg;
     Pkg.add(["DifferentialEquations", "DelayDiffEq", "DataFrames",
     "CSV"])'``)
@@ -83,8 +83,8 @@ floor between explicit Taylor expansion and Hermite interpolation.
 
 # Reproducibility Instructions
 At the top level of the directory structure do the following in bash/zsh
-shell: ``make compile && make run && make julia && make plot``. If you
-want to run the whole pipeline you can do in the shell: ``make full_pipeline``.
+shell: ``export CXX=g++`` Then ``make compile && make run && make julia && make plot``. If you want to run the whole pipeline you can do in the
+shell: ``make full_pipeline``.
 
 ## Citation
 If you use AATS in your research, please cite our upcoming paper:

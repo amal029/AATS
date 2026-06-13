@@ -1,5 +1,5 @@
 # Compiler settings
-CXX = g++
+CXX ?= $CXX
 CXXFLAGS = -ftree-vectorize -ffast-math -std=c++17 -march=native -O3 -I./include
 
 # Target executable
