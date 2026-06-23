@@ -130,6 +130,6 @@ shell: ``export CXX=g++``. Then ``make clean && make full_pipeline``.
 ## Citation
 If you use AATS in your research, please cite our upcoming paper:
 
-Malik, Avinash. "Asynchronous Adaptive Taylor Methods for Highly Coupled
-Delay Differential Equations." [Journal/Conference Name], [Year]. DOI:
-[Placeholder], github link for now.
+Malik, Avinash. "An Asynchronous multi-rate Taylor method for Delay
+Differential Equations" (pre-print) arxiv,
+https://arxiv.org/abs/2606.21044
